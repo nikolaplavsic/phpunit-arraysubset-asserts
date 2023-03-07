@@ -8,8 +8,8 @@ use ArrayAccess;
 use DMS\PHPUnitExtensions\ArraySubset\Constraint\ArraySubset;
 use Exception;
 use PHPUnit\Framework\Assert as PhpUnitAssert;
-use PHPUnit\Framework\ExpectationFailedException;
-use PHPUnit\Framework\InvalidArgumentException;
+use PHPUnit\Event\ExpectationFailedException;
+use InvalidArgumentException;
 use PHPUnit\Util\InvalidArgumentHelper;
 
 use function class_exists;
@@ -32,9 +32,9 @@ trait ArraySubsetAsserts
         if (! (is_array($subset) || $subset instanceof ArrayAccess)) {
             if (class_exists(InvalidArgumentException::class)) {
                 // PHPUnit 8.4.0+.
-                throw InvalidArgumentException::create(
-                    1,
-                    'array or ArrayAccess'
+                throw new InvalidArgumentException(
+                    'Subset array must be of type array',
+                    1
                 );
             }
 
@@ -48,9 +48,9 @@ trait ArraySubsetAsserts
         if (! (is_array($array) || $array instanceof ArrayAccess)) {
             if (class_exists(InvalidArgumentException::class)) {
                 // PHPUnit 8.4.0+.
-                throw InvalidArgumentException::create(
-                    2,
-                    'array or ArrayAccess'
+                throw new InvalidArgumentException(
+                    'Array tested must be of type array',
+                    1
                 );
             }
 

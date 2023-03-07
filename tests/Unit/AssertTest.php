@@ -8,6 +8,7 @@ use DMS\PHPUnitExtensions\ArraySubset\Assert;
 use PHPUnit\Framework\Exception;
 use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Framework\TestCase;
+use InvalidArgumentException;
 
 /**
  * @requires PHPUnit >= 8
@@ -28,13 +29,13 @@ final class AssertTest extends TestCase
 
     public function testAssertArraySubsetThrowsExceptionForInvalidSubsetArgument(): void
     {
-        $this->expectException(Exception::class);
+        $this->expectException(InvalidArgumentException::class);
         Assert::assertArraySubset('string', '');
     }
 
     public function testAssertArraySubsetThrowsExceptionForInvalidArrayArgument(): void
     {
-        $this->expectException(Exception::class);
+        $this->expectException(InvalidArgumentException::class);
         Assert::assertArraySubset([], '');
     }
 
